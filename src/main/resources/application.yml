@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: circuit-breaker-demo
+
+server:
+  port: 8080
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myServiceCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,circuitbreakers,metrics
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
