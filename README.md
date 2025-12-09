@@ -62,4 +62,3 @@ The circuit breaker will:
 
 Typical output: ~36% success, ~24% failures, ~40% blocked by circuit breaker
 
-Murtuza Ansari 
